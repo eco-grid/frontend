@@ -49,3 +49,24 @@ def fetch_historic_data():
         print(f"Error fetching data: {e}")
         return pd.DataFrame()
     
+def stop_current_flow():
+    try:
+        response = requests.post(f"{API_URL}/api/stop")
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"Error stopping current flow: {e}")
+        return False
+    
+def adjust_panel_angle(new_angle):
+    try:
+        response = requests.post(f"{API_URL}/api/angle", json={"angle": new_angle})
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"Error adjusting panel angle: {e}")
+        return False

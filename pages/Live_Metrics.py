@@ -118,7 +118,7 @@ with container1:
 
     # Live Data Table
     with data_table_col:
-        live_df = pd.DataFrame([st.session_state['live_data'].reverse()])
+        live_df = pd.DataFrame([st.session_state['recent_data'].reverse()])
         styled_df = live_df.style.format({
             "voltage": "{:.1f} V",
             "current": "{:.1f} mA",

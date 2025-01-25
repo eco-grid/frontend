@@ -25,10 +25,13 @@ with col4:
 st.subheader("Power Generation")
 
 df = pd.DataFrame({
-    "Time": ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
-    "Power": [100, 200, 300, 400, 500, 600, 700],
+    "time": ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
+    "power": [100, 200, 300, 400, 500, 600, 700],
+    "current": [10, 20, 30, 40, 50, 60, 70],
+    "voltage": [15, 30, 11, 20, 20, 30, 40],
+    
 })
 #json_data = fetch_historic_data()
 #data = json.loads(json_data)  # Converts JSON string to a Python dictionary
 #df = pd.DataFrame(data)
-st.line_chart(df.set_index("Time"))
+st.area_chart(df.set_index("time"))

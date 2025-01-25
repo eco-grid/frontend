@@ -11,10 +11,6 @@ from utils import make_donut, fetch_current_data
 if 'live_data'not in st.session_state:
     st.session_state['live_data'] = fetch_current_data()
 
-
-
-if 'live_data' not in st.session_state:
-    st.session_state['live_data'] = {}
 if 'current_data' not in st.session_state:
     st.session_state['current_data'] = pd.DataFrame()
 
@@ -52,7 +48,6 @@ with efficiency_col:
 with container2:
     st.subheader("Current Data")
     if st.session_state['live_data']:
-        print("SESSION STATE")
         print(st.session_state['live_data'])
         cur_data_col1, cur_data_col2, cur_data_col3 = st.columns(3)
         power = st.session_state['live_data']['power']

@@ -34,7 +34,6 @@ with container1:
         # Slider for angle input
         angle = st.slider('Adjust Angle', min_value=0, max_value=180, value=90)
         
-        # Button to submit the angle
         if st.button('Submit Angle'):
             try:
                 adjust_panel_angle(angle)
@@ -46,9 +45,16 @@ with container1:
         st.write("The solar panel is adjusting automatically based on sensors and algorithms.")
 
 with container2:
-    st.subheader('Stop Current Flow')
+    st.markdown("""
+    <style>
+    .red-text {
+        color: red;
+    }
+    </style>
+    <h2 style="color: red">Emergency Stop</h2>
+    """, unsafe_allow_html=True)
     st.write('Click the button below to stop the current flow from the solar panel.')
-    if st.button('Stop Current Flow'):
+    if st.button('STOP'):
         try:
             stop_current_flow()
             st.success('Current flow stopped successfully.')

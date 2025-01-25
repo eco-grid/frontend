@@ -34,7 +34,7 @@ def make_donut(input_response, input_text, input_color):
                       legend=None),
   ).properties(width=130, height=130)
     
-  text = plot.mark_text(align='center', color="#29b5e8", font="Lato", fontSize=32, fontWeight=700, fontStyle="italic").encode(text=alt.value(f'{input_response} %'))
+  text = plot.mark_text(align='center', color="#29b5e8", font="Helvetica", fontSize=32, fontWeight=500, fontStyle="italic").encode(text=alt.value(f'{input_response} %'))
   plot_bg = alt.Chart(source_bg).mark_arc(innerRadius=45, cornerRadius=20).encode(
       theta="% value",
       color= alt.Color("Topic:N",
@@ -78,6 +78,9 @@ with efficiency_col:
     # Display the chart in Streamlit
     st.text("Efficiency")
     st.altair_chart(chart, use_container_width=True)
+    st.write("Panel Angle: ", 45, "°")
+    st.write("Sun Angle: ", 30, "°")
+
 # Display the DataFrame
 with data_table_col:
     df = generate_data()
@@ -92,6 +95,8 @@ with data_table_col:
 
 
 with container2:
+    
+    st.subheader("Current Data")
     cur_data_col1, cur_data_col2, cur_data_col3 = st.columns(3)
 cur_data_col1.metric("Power", "100 W", "7 W")
 cur_data_col2.metric("Current", "9 mA", "-2 mA")

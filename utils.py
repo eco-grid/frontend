@@ -1,9 +1,17 @@
 import requests
 import json
 import pandas as pd
+from websocket import create_connection
+
 
 API_URL = "http://192.168.8.227"
 def fetch_live_data():
+    ws = create_connection(f"{API_URL}/ws/device_data")
+    while True:
+        result = ws.recv()
+        ws.close()
+        return result
+def fetch__data():
     try:
         response = requests.get(f"{API_URL}/api/current")
         if response.status_code == 200:
@@ -40,3 +48,4 @@ def fetch_historic_data():
     except Exception as e:
         print(f"Error fetching data: {e}")
         return pd.DataFrame()
+    

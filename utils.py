@@ -4,13 +4,12 @@ import pandas as pd
 
 API_URL = "http://192.168.8.227"
 def fetch_live_data():
-    # Replace the URL with the actual endpoint or fetch from serial input
     try:
-        response = requests.get("http://your-arduino-endpoint.com/data")  # Example API
+        response = requests.get(f"{API_URL}/api/current")
         if response.status_code == 200:
             json_data = response.json()
             if(json_data):
-                data = json.loads(json_data)  # Converts JSON string to a Python dictionary
+                data = json.loads(json_data)
                 return pd.DataFrame(data)
             else:
                 return pd.DataFrame()

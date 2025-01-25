@@ -60,9 +60,25 @@ def highlight_max(s):
     return ['background-color: #53a567; color: white' if v else '' for v in is_max]
 
 
-#---------------- UI -----------------
-st.set_page_config(page_title="Metrics", page_icon="🌳")
+#------------------------- UI -----------------------------
+st.set_page_config(
+    page_title="Live Metrics",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="collapsed")
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+   st.page_link("Home.py", label="**Home**", icon="🏠")
 
+with col2:
+   st.page_link("pages/Historic_Data.py", label="**Historic Data**", icon="📊")
+
+with col3:
+   st.page_link("pages/Live_Metrics.py", label="**Live Metrics**", icon="📈")
+
+
+with col4:
+    st.page_link("pages/Manage_Device.py", label="**Manage Device**", icon="⚙️")
 container1 = st.container(border=True)
 container2 = st.container(border=True)
 

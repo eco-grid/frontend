@@ -3,4 +3,5 @@ pandas
 requests
 altair
 json
-websocket
+time
+threading

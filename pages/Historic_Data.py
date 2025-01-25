@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import streamlit as st
-import json
 from utils import fetch_historic_data
 st.set_page_config(
     page_title="Historic Data",
@@ -18,20 +16,21 @@ with col2:
 with col3:
    st.page_link("pages/Live_Metrics.py", label="**Live Metrics**", icon="📈")
 
-
 with col4:
     st.page_link("pages/Manage_Device.py", label="**Manage Device**", icon="⚙️")
 
 st.subheader("Power Generation")
 
-df = pd.DataFrame({
-    "time": ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
-    "power": [100, 200, 300, 400, 500, 600, 700],
-    "current": [10, 20, 30, 40, 50, 60, 70],
-    "voltage": [15, 30, 11, 20, 20, 30, 40],
+#df = pd.DataFrame({
+   # "timestamp": ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
+   # "power": [100, 200, 300, 400, 500, 600, 700],
+   # "current": [10, 20, 30, 40, 50, 60, 70],
+   # "voltage": [15, 30, 11, 20, 20, 30, 40],
     
-})
-#json_data = fetch_historic_data()
-#data = json.loads(json_data)  # Converts JSON string to a Python dictionary
-#df = pd.DataFrame(data)
-st.area_chart(df.set_index("time"))
+#})
+df = fetch_historic_data()
+df.drop(columns=["angle"], inplace=True, errors="ignore")
+if(df.empty):
+    st.warning("No data available.")
+else:
+    st.area_chart(df.set_index("timestamp"))

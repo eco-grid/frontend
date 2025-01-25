@@ -24,7 +24,11 @@ with col4:
 
 st.subheader("Power Generation")
 
-json_data = fetch_historic_data()
-data = json.loads(json_data)  # Converts JSON string to a Python dictionary
-df = pd.DataFrame(data)
+df = pd.DataFrame({
+    "Time": ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
+    "Power": [100, 200, 300, 400, 500, 600, 700],
+})
+#json_data = fetch_historic_data()
+#data = json.loads(json_data)  # Converts JSON string to a Python dictionary
+#df = pd.DataFrame(data)
 st.line_chart(df.set_index("Time"))

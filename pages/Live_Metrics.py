@@ -63,12 +63,12 @@ def highlight_max(s):
 #---------------- UI -----------------
 st.set_page_config(page_title="Metrics", page_icon="🌳")
 
-cur_data_col, efficiency_col, data_table_col = st.columns(spec=[0.2, 0.3, 0.5])
+container1 = st.container(border=True)
+container2 = st.container(border=True)
 
-cur_data_col.metric("Power", "100 W", "7 W")
-cur_data_col.metric("Current", "9 mA", "-2 mA")
-cur_data_col.metric("Voltage", "12 V", "2 V")
 
+with container1:
+    efficiency_col, data_table_col = st.columns(spec=[0.5, 0.5])
 
 with efficiency_col:
     st.subheader("Power Generation")
@@ -78,9 +78,6 @@ with efficiency_col:
     # Display the chart in Streamlit
     st.text("Efficiency")
     st.altair_chart(chart, use_container_width=True)
-
-
-
 # Display the DataFrame
 with data_table_col:
     df = generate_data()
@@ -92,3 +89,10 @@ with data_table_col:
             {'selector': 'tr:hover', 'props': [('background-color', '#dddddd')]}
         ])
     st.write("### Solar Panel Data", styled_df)
+
+
+with container2:
+    cur_data_col1, cur_data_col2, cur_data_col3 = st.columns(3)
+cur_data_col1.metric("Power", "100 W", "7 W")
+cur_data_col2.metric("Current", "9 mA", "-2 mA")
+cur_data_col3.metric("Voltage", "12 V", "2 V")

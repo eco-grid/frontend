@@ -1,4 +1,6 @@
 import streamlit as st
+from utils import fetch_historic_data
+data = fetch_historic_data()
 st.set_page_config(
     page_title="Home",
     page_icon="🏠",
@@ -17,49 +19,21 @@ with col3:
 
 with col4:
     st.page_link("pages/Manage_Device.py", label="**Manage Device**", icon="⚙️")
-st.markdown(
-    """
-    <style>
-    .title-text {
-        font-size: 48px;
-        font-weight: bold;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-    }
-    .image-container {
-        position: relative;
-        text-align: center;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
-st.markdown(
-    """
-    <div class="image-container">
-        <img src="./wind-turbines-and-solar-panels-at-sunset.webp" style="width: 100%; border-radius: 15px;">
-        <div class="title-text">Eco-Grid</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.subheader("Competition Summary")
-st.markdown(
-    """
-    The Eco-Grid application is designed to monitor and control renewable energy power plants, combining real-time 
-    data monitoring, automated controls, and emergency safety mechanisms to enhance operational efficiency 
-    and environmental sustainability.
-    
-    Key Features:
-    - Real-time voltage, current, power, and sun angle monitoring.
-    - Visual representation of metrics for analysis.
-    - Emergency shutdown and manual/automatic control for solar panel angles.
-    """
-)
+description_col1, description_col2 = st.columns([1, 1])
+with description_col1:
+   st.subheader("Competition Summary")
+   st.markdown(
+      """
+      The Eco-Grid application is designed to monitor and control renewable energy power plants, combining real-time 
+      data monitoring, automated controls, and emergency safety mechanisms to enhance operational efficiency 
+      and environmental sustainability.
+      
+      Key Features:
+      - Real-time voltage, current, power, and sun angle monitoring.
+      - Visual representation of metrics for analysis.
+      - Emergency shutdown and manual/automatic control for solar panel angles.
+      """
+   )
+with description_col2:
+   st.image("wind-turbines-and-solar-panels-at-sunset.webp", use_container_width=True)

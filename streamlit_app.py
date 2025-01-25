@@ -1,32 +1,55 @@
 import streamlit as st
-import requests
 
-# API base URL
-BASE_URL = "http://localhost:5173"
+# Page Navigation
+st.sidebar.title("Eco-Grid Navigation")
+page = st.sidebar.radio("Go to", ["Info Page", "Real-Time Metrics", "Graphs"])
 
-st.title("Renewable Energy Control System")
+# Info Page
+if page == "Info Page":
+    # Display the title image
+    st.markdown(
+        """
+        <style>
+        .title-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .image-container {
+            position: relative;
+            text-align: center;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-# Fetch and display real-time data
-st.header("Real-Time Data")
-try:
-    response = requests.get(f"{BASE_URL}/data")
-    if response.status_code == 200:
-        data = response.json()
-        st.metric("Voltage (kV)", data["voltage"])
-        st.metric("Current (A)", data["current"])
-        st.metric("Sun Angle (°)", data["angle"])
-except Exception as e:
-    st.error(f"Error fetching data: {e}")
+    st.markdown(
+        """
+        <div class="image-container">
+            <img src="frontend/wind-turbines-and-solar-panels-at-sunset.webp" style="width: 100%; border-radius: 15px;">
+            <div class="title-text">Eco-Grid</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-# Control actions
-st.header("Control Panel")
-action = st.selectbox("Select Action", ["None", "Adjust Panel", "Emergency Shutdown"])
-if st.button("Execute Action"):
-    try:
-        response = requests.post(f"{BASE_URL}/control", json={"action": action})
-        if response.status_code == 200:
-            st.success(response.json()["status"])
-        else:
-            st.error("Failed to execute action")
-    except Exception as e:
-        st.error(f"Error sending control command: {e}")
+    st.subheader("Competition Summary")
+    st.markdown(
+        """
+        The Eco-Grid application is designed to monitor and control renewable energy power plants, combining real-time 
+        data monitoring, automated controls, and emergency safety mechanisms to enhance operational efficiency 
+        and environmental sustainability.
+        
+        Key Features:
+        - Real-time voltage, current, power, and sun angle monitoring.
+        - Visual representation of metrics for analysis.
+        - Emergency shutdown and manual/automatic control for solar panel angles.
+        """
+    )
